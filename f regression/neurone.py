@@ -1,0 +1,17 @@
+from random import random
+import numpy as np
+class neurone:
+    def __init__(self, nbr_input, e, f):
+        self.n = nbr_input
+        self.w = [random() for _ in range(nbr_input + 1)]
+        self.e = e
+        self.f = f
+    def forward(self, x):
+        x = [1] + x
+        sum = 0
+        for i in range(self.n + 1):
+            sum += x[i] * self.w[i]
+        return sum, self.f(sum)
+    def actualization(self, grad):
+        for i in range(self.n + 1):
+            self.w[i] -= self.e * grad[i]
